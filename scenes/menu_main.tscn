@@ -1,0 +1,248 @@
+[gd_scene load_steps=18 format=3 uid="uid://btosq2c8h4f4o"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_eamyj"]
+[ext_resource type="PackedScene" uid="uid://da615pl4crgew" path="res://scenes/game.tscn" id="2_4cmqe"]
+[ext_resource type="FontFile" uid="uid://k0fottlfbuv6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_d628r"]
+[ext_resource type="PackedScene" uid="uid://deb3yovewq6vv" path="res://scenes/game_0.tscn" id="2_nqsim"]
+[ext_resource type="Texture2D" uid="uid://b6hddr130kun4" path="res://Screenshot (2848).png" id="2_o2xdw"]
+[ext_resource type="Texture2D" uid="uid://dd2jo1hersym3" path="res://Screenshot 2025-05-11 184501.png" id="3_tx3u4"]
+[ext_resource type="Texture2D" uid="uid://clom0qyjx7mif" path="res://Screenshot 2025-05-11 184355.png" id="4_mbwxo"]
+[ext_resource type="Script" path="res://scenes/fade.gd" id="5_0sreb"]
+[ext_resource type="Script" path="res://scenes/play.gd" id="5_i4bpd"]
+[ext_resource type="Texture2D" uid="uid://gme4bke07eix" path="res://Screenshot 2025-05-11 184253.png" id="5_orlsr"]
+
+[sub_resource type="Animation" id="Animation_2svsu"]
+resource_name = "Backgound"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(575, 323), Vector2(675, 323), Vector2(575, 323)]
+}
+
+[sub_resource type="Animation" id="Animation_dcyl5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(576, 323)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h0k1r"]
+_data = {
+"Backgound": SubResource("Animation_2svsu"),
+"RESET": SubResource("Animation_dcyl5")
+}
+
+[sub_resource type="Animation" id="Animation_fhxhf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_03k0m"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_lqt70"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wd1g2"]
+_data = {
+"RESET": SubResource("Animation_fhxhf"),
+"fade_in": SubResource("Animation_03k0m"),
+"fade_out": SubResource("Animation_lqt70")
+}
+
+[node name="MenuMain" type="Node2D"]
+position = Vector2(381, 228)
+script = ExtResource("1_eamyj")
+textures = Array[Texture]([ExtResource("2_o2xdw"), ExtResource("3_tx3u4"), ExtResource("4_mbwxo"), ExtResource("5_orlsr")])
+changeScene = ExtResource("2_4cmqe")
+tutorialScene = ExtResource("2_nqsim")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer2"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2/Control"]
+position = Vector2(576, 323)
+scale = Vector2(2, 2)
+texture = ExtResource("2_o2xdw")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -66.0
+offset_right = 175.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_d628r")
+theme_override_font_sizes/font_size = 35
+text = "ACSARALOCA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_d628r")
+theme_override_font_sizes/font_size = 35
+text = "HANACARAKA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_d628r")
+theme_override_font_sizes/font_size = 35
+text = "ADVENTURE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d628r")
+theme_override_font_sizes/font_size = 35
+text = "PLAY"
+script = ExtResource("5_i4bpd")
+
+[node name="Tutorial" type="Button" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d628r")
+theme_override_font_sizes/font_size = 35
+text = "TUTORIAL"
+
+[node name="Quit" type="Button" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_d628r")
+theme_override_font_sizes/font_size = 35
+text = "QUIT"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2"]
+libraries = {
+"": SubResource("AnimationLibrary_h0k1r")
+}
+
+[node name="CanvasLayer4" type="CanvasLayer" parent="."]
+script = ExtResource("5_0sreb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer4"]
+libraries = {
+"": SubResource("AnimationLibrary_wd1g2")
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer4/AnimationPlayer"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="button_down" from="CanvasLayer2/MarginContainer/VBoxContainer/Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="CanvasLayer2/MarginContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_button_down"]
+[connection signal="button_down" from="CanvasLayer2/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_button_down"]

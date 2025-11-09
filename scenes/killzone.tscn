@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://y8vv2jto1bt3"]
+
+[ext_resource type="Script" path="res://scripts/killzone.gd" id="1_dpc0s"]
+[ext_resource type="AudioStream" uid="uid://djggbmmk2kb1k" path="res://assets/music/PlayerHit.mp3" id="2_4e6fr"]
+
+[node name="Killzone" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_dpc0s")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_4e6fr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

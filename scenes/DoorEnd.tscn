@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0lovwm7v1msa"]
+
+[ext_resource type="Script" path="res://scripts/door.gd" id="1_3b1yi"]
+[ext_resource type="Texture2D" uid="uid://c0wsgopc0aptm" path="res://assets/door/bamboo-doorv2.png" id="2_rld4v"]
+[ext_resource type="AudioStream" uid="uid://djxqdkfdef8xl" path="res://assets/music/FFI_Victory.mp3" id="3_rv6r7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_86nd7"]
+
+[sub_resource type="Animation" id="Animation_yipkb"]
+resource_name = "Door"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.1, 0.166667, 0.233333, 0.3, 0.366667, 0.433333, 0.5, 0.566667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 2, 3, 4, 5, 6, 6]
+}
+
+[sub_resource type="Animation" id="Animation_ckk6s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x7bim"]
+_data = {
+"Door": SubResource("Animation_yipkb"),
+"RESET": SubResource("Animation_ckk6s")
+}
+
+[node name="DoorEnd" type="Area2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_3b1yi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_rld4v")
+hframes = 7
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(5.41455, 5.37034)
+shape = SubResource("CircleShape2D_86nd7")
+one_way_collision_margin = 0.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rv6r7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x7bim")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

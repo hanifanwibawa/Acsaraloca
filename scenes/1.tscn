@@ -1,0 +1,202 @@
+[gd_scene load_steps=11 format=3 uid="uid://cdk7hv42j33j0"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_47vxn"]
+[ext_resource type="FontFile" uid="uid://k0fottlfbuv6" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_kio16"]
+[ext_resource type="PackedScene" uid="uid://da615pl4crgew" path="res://scenes/game.tscn" id="2_lv5md"]
+[ext_resource type="Texture2D" uid="uid://b6hddr130kun4" path="res://Screenshot (2848).png" id="2_mvobi"]
+[ext_resource type="Script" path="res://scenes/fade.gd" id="5_f5fqr"]
+[ext_resource type="Script" path="res://scenes/play.gd" id="5_mahg6"]
+
+[sub_resource type="Animation" id="Animation_fhxhf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_03k0m"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_lqt70"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/ColorRect:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wd1g2"]
+_data = {
+"RESET": SubResource("Animation_fhxhf"),
+"fade_in": SubResource("Animation_03k0m"),
+"fade_out": SubResource("Animation_lqt70")
+}
+
+[node name="MenuMain" type="Node2D"]
+position = Vector2(381, 228)
+script = ExtResource("1_47vxn")
+changeScene = ExtResource("2_lv5md")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer2"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer2/Control"]
+position = Vector2(576, 323)
+scale = Vector2(2, 2)
+texture = ExtResource("2_mvobi")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -148.5
+offset_right = 225.0
+offset_bottom = 148.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_kio16")
+theme_override_font_sizes/font_size = 35
+text = "GAME OVER!
+KAMU KALAH"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_kio16")
+theme_override_font_sizes/font_size = 35
+text = "COIN : "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_kio16")
+theme_override_font_sizes/font_size = 35
+text = "COIN : "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_kio16")
+theme_override_font_sizes/font_size = 35
+text = "REPLAY"
+script = ExtResource("5_mahg6")
+
+[node name="Menu" type="Button" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_kio16")
+theme_override_font_sizes/font_size = 35
+text = "MENU"
+
+[node name="Quit" type="Button" parent="CanvasLayer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_kio16")
+theme_override_font_sizes/font_size = 35
+text = "QUIT"
+
+[node name="CanvasLayer4" type="CanvasLayer" parent="."]
+script = ExtResource("5_f5fqr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer4"]
+libraries = {
+"": SubResource("AnimationLibrary_wd1g2")
+}
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer4/AnimationPlayer"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="button_down" from="CanvasLayer2/MarginContainer/VBoxContainer/Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="CanvasLayer2/MarginContainer/VBoxContainer/Play" to="CanvasLayer2" method="_on_play_button_down"]
+[connection signal="button_down" from="CanvasLayer2/MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_button_down"]
+[connection signal="button_down" from="CanvasLayer2/MarginContainer/VBoxContainer/Menu" to="CanvasLayer2" method="_on_menu_button_down"]
+[connection signal="button_down" from="CanvasLayer2/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_button_down"]
+[connection signal="button_down" from="CanvasLayer2/MarginContainer/VBoxContainer/Quit" to="CanvasLayer2" method="_on_quit_button_down"]
